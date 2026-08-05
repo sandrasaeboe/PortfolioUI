@@ -36,9 +36,9 @@ export default function Experience() {
         <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:16 }}>
           <div>
             <h3 style={{ fontSize:'clamp(22px,3.5vw,36px)', fontWeight:700, letterSpacing:'-0.03em', textTransform:'uppercase', color:'#0a0a0a', marginBottom:10 }}>Bachelor's — Interactiondesign + Web Dev</h3>
-            <p style={{ fontSize:15, color:'rgba(10,10,10,0.6)', fontWeight:300 }}>Interaction Design with Web Development. Graduating June 2026.</p>
+            <p style={{ fontSize:15, color:'rgba(10,10,10,0.6)', fontWeight:300 }}>Interaction Design with Web Development. Graduated June 2026.</p>
           </div>
-          <span style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', padding:'6px 14px', border:'1px solid rgba(10,10,10,0.25)', color:'rgba(10,10,10,0.6)', whiteSpace:'nowrap' }}>In Progress</span>
+          <span style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', padding:'6px 14px', border:'1px solid rgba(10,10,10,0.25)', color:'rgba(10,10,10,0.6)', whiteSpace:'nowrap' }}>Graduated</span>
         </div>
       </div>
     </section>
