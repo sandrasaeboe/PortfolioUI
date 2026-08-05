@@ -1,21 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { personal, skills } from '../data/portfolio';
 import useInView from '../hooks/useInView';
-
-function SkillRow({ skill, i }) {
-  const [ref, inView] = useInView(0.1);
-  const [hov, setHov] = useState(false);
-  const w = 52 + ((skill.charCodeAt(0)*11 + skill.charCodeAt(skill.length-1)*7 + skill.length*13) % 42);
-  return (
-    <div ref={ref} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
-      style={{ marginBottom:16, opacity:inView?1:0, transform:inView?'none':'translateY(10px)', transition:`opacity .5s ${i*.04}s cubic-bezier(0.16,1,0.3,1), transform .5s ${i*.04}s` }}>
-      <span style={{ fontSize:14, color:hov?'#0a0a0a':'rgba(10,10,10,0.55)', display:'block', marginBottom:7, transition:'color .2s', fontWeight:400 }}>{skill}</span>
-      <div style={{ height:1, background:'rgba(10,10,10,0.1)' }}>
-        <div style={{ height:1, background:hov?'#0a0a0a':'rgba(10,10,10,0.35)', width:inView?`${w}%`:'0%', transition:`width .9s ${i*.05}s cubic-bezier(0.16,1,0.3,1)` }} />
-      </div>
-    </div>
-  );
-}
 
 export default function About() {
   const [ref, inView] = useInView(0.05);
@@ -45,7 +30,7 @@ export default function About() {
 
           {/* Fact grid */}
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:1, background:'rgba(10,10,10,0.1)' }}>
-            {[['Location',personal.location],['Available',personal.available],['Education','IxD + Web Dev, Beckmans'],['Seeking','Full-time roles']].map(([k,v]) => (
+            {[['Location',personal.location],['Available',personal.available],['Education','Interactiondesign + Web Dev, Beckmans'],['Seeking','Full-time roles']].map(([k,v]) => (
               <div key={k} style={{ background:'#f2f0eb', padding:'20px' }}>
                 <div style={{ fontSize:10, letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)', marginBottom:5 }}>{k}</div>
                 <div style={{ fontSize:14, color:'#0a0a0a', fontWeight:500 }}>{v}</div>
@@ -67,10 +52,14 @@ export default function About() {
 
         {/* Skills */}
         <div>
-          {skills.map((group, gi) => (
-            <div key={group.cat} style={{ marginBottom:44 }}>
-              <div style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.38)', marginBottom:20, paddingBottom:14, borderBottom:'1px solid rgba(10,10,10,0.08)' }}>{group.cat}</div>
-              {group.items.map((s,si) => <SkillRow key={s} skill={s} i={gi*7+si} />)}
+          {skills.map((group) => (
+            <div key={group.cat} style={{ marginBottom:36 }}>
+              <div style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.38)', marginBottom:18, paddingBottom:14, borderBottom:'1px solid rgba(10,10,10,0.08)' }}>{group.cat}</div>
+              <div style={{ display:'flex', flexWrap:'wrap', gap:10 }}>
+                {group.items.map(s => (
+                  <span key={s} style={{ fontSize:13, padding:'8px 16px', border:'1px solid rgba(10,10,10,0.15)', color:'rgba(10,10,10,0.68)', fontWeight:400 }}>{s}</span>
+                ))}
+              </div>
             </div>
           ))}
         </div>

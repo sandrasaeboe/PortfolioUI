@@ -66,21 +66,11 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Bottom — bio + CTA, pushed to bottom of viewport */}
-      <div style={{ paddingBottom:64, display:'grid', gridTemplateColumns:'1fr 1fr', gap:48, alignItems:'end', opacity:on?1:0, transition:'opacity .8s .55s', borderTop:'1px solid rgba(10,10,10,0.1)', paddingTop:40, marginTop:40 }}>
+      {/* Bottom — bio, pushed to bottom of viewport */}
+      <div style={{ paddingBottom:64, opacity:on?1:0, transition:'opacity .8s .55s', borderTop:'1px solid rgba(10,10,10,0.1)', paddingTop:40, marginTop:40 }}>
         <p style={{ fontSize:16, color:'rgba(10,10,10,0.65)', lineHeight:1.85, fontWeight:300, maxWidth:480 }}>
           {personal.bio}
         </p>
-        <div style={{ display:'flex', gap:16, justifyContent:'flex-end', alignItems:'center', flexWrap:'wrap' }}>
-          <a href="#work" style={{ fontSize:13, letterSpacing:'0.1em', textTransform:'uppercase', padding:'13px 28px', background:'#0a0a0a', color:'#f2f0eb', transition:'opacity .2s' }}
-            onMouseEnter={e=>e.currentTarget.style.opacity='.75'} onMouseLeave={e=>e.currentTarget.style.opacity='1'}>
-            View Work
-          </a>
-          <a href={`mailto:${personal.email}`} style={{ fontSize:13, letterSpacing:'0.04em', color:'rgba(10,10,10,0.5)', borderBottom:'1px solid rgba(10,10,10,0.2)', paddingBottom:2, transition:'all .2s' }}
-            onMouseEnter={e=>{e.currentTarget.style.color='#0a0a0a';e.currentTarget.style.borderColor='rgba(10,10,10,0.6)'}} onMouseLeave={e=>{e.currentTarget.style.color='rgba(10,10,10,0.5)';e.currentTarget.style.borderColor='rgba(10,10,10,0.2)'}}>
-            {personal.email}
-          </a>
-        </div>
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import useInView from '../hooks/useInView';
 
 function ProjectRow({ p, i }) {
   const [ref, inView] = useInView(0.06);
-  const [open, setOpen] = useState(i === 0);
+  const [open, setOpen] = useState(false);
   const [hov, setHov] = useState(false);
 
   return (
