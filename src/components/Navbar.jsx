@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { personal } from '../data/portfolio';
-const L = [['Work','#work'],['About','#about'],['Experience','#experience'],['Contact','#contact']];
+const L = [['Work','/#work'],['About','/#about'],['Experience','/#experience'],['Contact','/#contact']];
 export default function Navbar() {
   const [s,setS] = useState(false), [o,setO] = useState(false);
   useEffect(() => { const fn=()=>setS(window.scrollY>60); window.addEventListener('scroll',fn,{passive:true}); return()=>window.removeEventListener('scroll',fn); },[]);

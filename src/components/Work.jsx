@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { projects } from '../data/portfolio';
 import useInView from '../hooks/useInView';
 
@@ -65,10 +66,17 @@ function ProjectRow({ p, i }) {
           </div>
           <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
             <p style={{ fontSize:12, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>{p.role}</p>
-            <a href={p.link} style={{ display:'inline-flex', alignItems:'center', gap:10, fontSize:13, letterSpacing:'0.1em', textTransform:'uppercase', color:'#0a0a0a', borderBottom:'1px solid rgba(10,10,10,0.25)', paddingBottom:4, alignSelf:'flex-start', transition:'border-color .2s' }}
-              onMouseEnter={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.8)'} onMouseLeave={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.25)'}>
-              View project ↗
-            </a>
+            {p.link.startsWith('/') ? (
+              <Link to={p.link} style={{ display:'inline-flex', alignItems:'center', gap:10, fontSize:13, letterSpacing:'0.1em', textTransform:'uppercase', color:'#0a0a0a', borderBottom:'1px solid rgba(10,10,10,0.25)', paddingBottom:4, alignSelf:'flex-start', transition:'border-color .2s' }}
+                onMouseEnter={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.8)'} onMouseLeave={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.25)'}>
+                View case study ↗
+              </Link>
+            ) : (
+              <a href={p.link} style={{ display:'inline-flex', alignItems:'center', gap:10, fontSize:13, letterSpacing:'0.1em', textTransform:'uppercase', color:'#0a0a0a', borderBottom:'1px solid rgba(10,10,10,0.25)', paddingBottom:4, alignSelf:'flex-start', transition:'border-color .2s' }}
+                onMouseEnter={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.8)'} onMouseLeave={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.25)'}>
+                View project ↗
+              </a>
+            )}
           </div>
         </div>
       </div>

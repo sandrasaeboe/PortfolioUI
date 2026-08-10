@@ -9,13 +9,16 @@ export const personal = {
 };
 
 export const projects = [
-  { id:1, index:'01', title:'Webdesign', role:'Web Design, Frontend Development', year:'2026',
+  { id:0, index:'01', title:'Affinity', role:'UX Research, Interaction Design, Prototyping', year:'2026',
+    desc:"Bachelor's thesis in interaction design: can a local, offline AI model support designers during the clustering step of affinity diagramming — without sending sensitive research data to the cloud? Built a working prototype and tested it across six usability sessions, surfacing three distinct ways designers wanted to use it.",
+    tech:['Research through Design','Usability Testing','Figma','Python / Flask','Local AI (Ollama)'], what:'Structure, without giving up your data.', link: '/work/affinity' },
+  { id:1, index:'02', title:'Webdesign', role:'Web Design, Frontend Development', year:'2026',
     desc:'An editorial portfolio site for a Stockholm-based fine-line tattoo artist. A monochrome, gallery-first experience built around an infinite-looping coverflow gallery and a direct, form-free booking flow.',
     tech:['React','CSS','Scroll Snap Carousel','Responsive Design'], what:"A quiet gallery for ink that's meant to last.", link: 'https://emelinn.vercel.app' },
-  { id:2, index:'02', title:'Motion', role:'Component Design, Frontend Engineering', year:'2026',
+  { id:2, index:'03', title:'Motion', role:'Component Design, Frontend Engineering', year:'2026',
     desc:'A physics-based UI component library. Every component driven by spring physics and inertia. Fully documented with TypeScript types and live demos.',
     tech:['React','TypeScript','Spring Physics','Storybook'], what:'UI that moves like it has mass.', link:'https://motion-ui-that-moves.vercel.app' },
-  { id:3, index:'03', title:'Spiral', role:'UX Design, Full Stack Development', year:'2026',
+  { id:3, index:'04', title:'Spiral', role:'UX Design, Full Stack Development', year:'2026',
     desc:'A mental health app that catches spiraling thoughts before they take over. An AI layer reads what you write and offers grounding advice in the moment, while daily check-ins track energy, sleep and mood to surface patterns over time. A guided breathing exercise helps regulate the nervous system when things feel like too much.',
     tech:['React','AI-Assisted Insights','Data Visualization','Design System'], what:'A pause, built into the spiral.', link:'https://spiral-app-ss.vercel.app' },
 ];
