@@ -23,9 +23,10 @@ function ProjectRow({ p, i }) {
         onMouseEnter={() => setHov(true)}
         onMouseLeave={() => setHov(false)}
         data-hover
-        style={{ width:'100%', padding:'52px 48px', display:'flex', alignItems:'baseline', justifyContent:'space-between', gap:32, textAlign:'left', background:'transparent', transition:'background .3s' }}
+        className="work-row"
+        style={{ width:'100%', padding:'52px 48px', display:'flex', alignItems:'center', justifyContent:'space-between', gap:32, textAlign:'left', background:'transparent', transition:'background .3s' }}
       >
-        <div style={{ flex:1 }}>
+        <div style={{ flex:1, minWidth:0 }}>
           {/* Year + role — tiny above the title */}
           <p style={{ fontSize:11, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)', marginBottom:16, fontWeight:400 }}>
             {p.index} — {p.year}
@@ -45,12 +46,16 @@ function ProjectRow({ p, i }) {
             {p.title}
           </h3>
         </div>
+        {p.img && (
+          <img src={p.img} alt={`${p.title} — screenshot`} loading="lazy" className="work-thumb"
+            style={{ width:'clamp(200px,26vw,380px)', aspectRatio:'16 / 10', objectFit:'cover', objectPosition:'top', flexShrink:0, border:'1px solid rgba(10,10,10,0.1)', transition:'transform .5s cubic-bezier(0.16,1,0.3,1)', transform: hov && !open ? 'scale(1.02)' : 'none' }} />
+        )}
         <span style={{ fontSize:28, color:'rgba(10,10,10,0.3)', transform:open?'rotate(45deg)':'none', transition:'transform .4s cubic-bezier(0.16,1,0.3,1)', flexShrink:0, lineHeight:1 }}>+</span>
       </button>
 
       {/* Expanded content */}
-      <div style={{ overflow:'hidden', maxHeight:open?'600px':'0', transition:'max-height .6s cubic-bezier(0.16,1,0.3,1)' }}>
-        <div style={{ padding:'0 48px 60px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 80px', alignItems:'start' }}>
+      <div style={{ overflow:'hidden', maxHeight:open?'1000px':'0', transition:'max-height .6s cubic-bezier(0.16,1,0.3,1)' }}>
+        <div className="work-detail" style={{ padding:'0 48px 60px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 80px', alignItems:'start' }}>
           <div>
             <p style={{ fontSize:17, color:'rgba(10,10,10,0.7)', lineHeight:1.9, fontWeight:300, marginBottom:24 }}>
               {p.desc}
@@ -88,7 +93,7 @@ export default function Work() {
   const [ref, inView] = useInView(0.05);
   return (
     <section id="work" style={{ paddingTop:120 }}>
-      <div ref={ref} style={{ padding:'0 48px 56px', opacity:inView?1:0, transition:'opacity .7s cubic-bezier(0.16,1,0.3,1)' }}>
+      <div ref={ref} className="section-pad" style={{ padding:'0 48px 56px', opacity:inView?1:0, transition:'opacity .7s cubic-bezier(0.16,1,0.3,1)' }}>
         <p style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>Selected Work</p>
       </div>
       {projects.map((p,i) => <ProjectRow key={p.id} p={p} i={i} />)}

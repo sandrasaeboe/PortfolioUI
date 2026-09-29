@@ -8,12 +8,12 @@ export default function Contact() {
   return (
     <section id="contact" style={{ borderTop:'1px solid rgba(10,10,10,0.1)', paddingTop:120, paddingBottom:100 }}>
 
-      <div style={{ padding:'0 48px 64px' }}>
+      <div className="section-pad" style={{ padding:'0 48px 64px' }}>
         <span style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>Contact</span>
       </div>
 
       {/* Big statement line — like "MY TREND IS A LIFESTYLE" spanning full width */}
-      <div ref={eRef} style={{ padding:'0 48px 80px', opacity:eIn?1:0, transform:eIn?'none':'translateY(20px)', transition:'all .9s cubic-bezier(0.16,1,0.3,1)', overflow:'hidden' }}>
+      <div ref={eRef} className="section-pad" style={{ padding:'0 48px 80px', opacity:eIn?1:0, transform:eIn?'none':'translateY(20px)', transition:'all .9s cubic-bezier(0.16,1,0.3,1)', overflow:'hidden' }}>
         <a href={`mailto:${personal.email}`}
           style={{ display:'block', fontFamily:'Helvetica Neue,Helvetica,Arial,sans-serif', fontWeight:700, fontSize:'clamp(32px,6vw,96px)', letterSpacing:'-0.04em', lineHeight:1, color:'#0a0a0a', transition:'opacity .2s', wordBreak:'break-all' }}
           onMouseEnter={e=>e.currentTarget.style.opacity='.3'} onMouseLeave={e=>e.currentTarget.style.opacity='1'}>
@@ -22,7 +22,7 @@ export default function Contact() {
       </div>
 
       {/* CTA */}
-      <div ref={fRef} style={{ padding:'0 48px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 100px', opacity:fIn?1:0, transform:fIn?'none':'translateY(16px)', transition:'all .9s .1s cubic-bezier(0.16,1,0.3,1)' }}>
+      <div ref={fRef} className="section-pad two-col" style={{ padding:'0 48px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 100px', opacity:fIn?1:0, transform:fIn?'none':'translateY(16px)', transition:'all .9s .1s cubic-bezier(0.16,1,0.3,1)' }}>
         <div>
           <p style={{ fontSize:'clamp(22px,3vw,32px)', color:'#0a0a0a', fontWeight:500, letterSpacing:'-0.01em', lineHeight:1.4, marginBottom:32, maxWidth:420 }}>
             Reach out — I read every message and reply within 24 hours.

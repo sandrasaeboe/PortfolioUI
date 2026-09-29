@@ -41,6 +41,7 @@ export default function Cursor() {
     <style>{`
       body.ch div[style*="9999"] { width:36px!important; height:36px!important; }
       body.ch div[style*="9998"] { opacity:0!important; }
+      @media (hover: none) { div[style*="9999"], div[style*="9998"] { display:none!important; } }
     `}</style>
   </>
 );

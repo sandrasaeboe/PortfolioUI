@@ -31,7 +31,7 @@ function Body({ children, style }) {
 
 function Section({ id, label, title, children }) {
   return (
-    <section id={id} style={{ padding: '90px 48px', borderTop: `1px solid ${ink(0.1)}` }}>
+    <section id={id} style={{ padding: '90px var(--gutter)', borderTop: `1px solid ${ink(0.1)}` }}>
       <Reveal style={{ marginBottom: 44 }}>
         <div style={{ marginBottom: 18 }}><Label>{label}</Label></div>
         {title && <H2>{title}</H2>}
@@ -110,7 +110,7 @@ export default function ThesisCase() {
     <main style={{ paddingTop: 68 }}>
 
       {/* Back bar */}
-      <div style={{ padding: '28px 48px 0' }}>
+      <div style={{ padding: '28px var(--gutter) 0' }}>
         <Link to="/#work" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', color: ink(0.45), transition: 'color .2s' }}
           onMouseEnter={e => e.currentTarget.style.color = '#0a0a0a'} onMouseLeave={e => e.currentTarget.style.color = ink(0.45)}>
           ← Back to work
@@ -118,7 +118,7 @@ export default function ThesisCase() {
       </div>
 
       {/* Hero */}
-      <header style={{ padding: '48px 48px 90px' }}>
+      <header style={{ padding: '48px var(--gutter) 90px' }}>
         <Reveal>
           <p style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: ink(0.4), marginBottom: 20 }}>01 — 2026 — Bachelor's Thesis, Interaction Design</p>
           <h1 style={{ fontFamily: 'Helvetica Neue,Helvetica,Arial,sans-serif', fontWeight: 700, fontSize: 'clamp(64px,12vw,180px)', letterSpacing: '-0.05em', lineHeight: 0.85, textTransform: 'uppercase', color: '#0a0a0a', marginBottom: 40 }}>
@@ -152,7 +152,7 @@ export default function ThesisCase() {
       </Section>
 
       {/* Research Question */}
-      <section style={{ padding: '90px 48px', borderTop: `1px solid ${ink(0.1)}` }}>
+      <section style={{ padding: '90px var(--gutter)', borderTop: `1px solid ${ink(0.1)}` }}>
         <Reveal>
           <div style={{ marginBottom: 24 }}><Label>Research Question</Label></div>
           <Quote>
@@ -304,7 +304,7 @@ export default function ThesisCase() {
       </Section>
 
       {/* Footer detail */}
-      <footer style={{ padding: '56px 48px', borderTop: `1px solid ${ink(0.1)}` }}>
+      <footer style={{ padding: '56px var(--gutter)', borderTop: `1px solid ${ink(0.1)}` }}>
         <Reveal>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginBottom: 32 }}>
             {['Figma', 'Python', 'Flask', 'Ollama', 'Mistral', 'Affinity Diagramming', 'Usability Testing', 'Research through Design'].map(t => <Tag key={t}>{t}</Tag>)}

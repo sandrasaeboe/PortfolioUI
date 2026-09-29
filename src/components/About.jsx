@@ -8,12 +8,12 @@ export default function About() {
     <section id="about" style={{ paddingTop:140, paddingBottom:140 }}>
 
       {/* Section label */}
-      <div style={{ padding:'0 48px 60px' }}>
+      <div className="section-pad" style={{ padding:'0 48px 60px' }}>
         <span style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>About</span>
       </div>
 
       {/* Big statement — like "EVERY GLANCE IS A STATEMENT" taking full width */}
-      <div ref={ref} style={{ padding:'0 48px', marginBottom:100, opacity:inView?1:0, transition:'opacity .9s cubic-bezier(0.16,1,0.3,1)' }}>
+      <div ref={ref} className="section-pad" style={{ padding:'0 48px', marginBottom:100, opacity:inView?1:0, transition:'opacity .9s cubic-bezier(0.16,1,0.3,1)' }}>
         <h2 style={{ fontFamily:'Helvetica Neue,Helvetica,Arial,sans-serif', fontWeight:700, fontSize:'clamp(40px,7vw,100px)', letterSpacing:'-0.04em', lineHeight:0.88, textTransform:'uppercase', color:'#0a0a0a', marginBottom:0 }}>
           Designed with intention.<br/>
           <span style={{ color:'rgba(10,10,10,0.22)' }}>Built with precision.</span>
@@ -21,7 +21,7 @@ export default function About() {
       </div>
 
       {/* Two column content */}
-      <div style={{ padding:'0 48px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:80 }}>
+      <div className="section-pad two-col" style={{ padding:'0 48px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:80 }}>
         <div>
           <p style={{ fontSize:17, color:'rgba(10,10,10,0.72)', lineHeight:1.9, marginBottom:20, fontWeight:300 }}>{personal.bio2}</p>
           <p style={{ fontSize:17, color:'rgba(10,10,10,0.72)', lineHeight:1.9, marginBottom:56, fontWeight:300 }}>
@@ -30,7 +30,7 @@ export default function About() {
 
           {/* Fact grid */}
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:1, background:'rgba(10,10,10,0.1)' }}>
-            {[['Location',personal.location],['Available',personal.available],['Education','Interactiondesign + Web Dev, Beckmans'],['Seeking','Full-time roles']].map(([k,v]) => (
+            {[['Location',personal.location],['Available',personal.available],['Education','Interaction Design, Stockholm University'],['Seeking','Full-time roles']].map(([k,v]) => (
               <div key={k} style={{ background:'#f2f0eb', padding:'20px' }}>
                 <div style={{ fontSize:10, letterSpacing:'0.16em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)', marginBottom:5 }}>{k}</div>
                 <div style={{ fontSize:14, color:'#0a0a0a', fontWeight:500 }}>{v}</div>

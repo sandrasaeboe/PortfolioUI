@@ -15,7 +15,7 @@ export default function Hero() {
   useEffect(() => { const id = setTimeout(() => setOn(true), 100); return () => clearTimeout(id); }, []);
 
   return (
-    <section style={{ minHeight:'100vh', display:'flex', flexDirection:'column', padding:'0 48px', paddingTop:68, position:'relative' }}>
+    <section className="section-pad" style={{ minHeight:'100vh', display:'flex', flexDirection:'column', padding:'0 48px', paddingTop:68, position:'relative' }}>
 
       {/* Top small metadata row */}
       <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:32, paddingBottom:32, opacity:on?1:0, transition:'opacity .8s .1s' }}>
@@ -39,7 +39,7 @@ export default function Hero() {
           <span key={a} aria-hidden style={{
             position:'absolute',
             fontFamily:'Helvetica Neue,Helvetica,Arial,sans-serif',
-            fontWeight:700, fontSize:'clamp(96px,17vw,260px)',
+            fontWeight:700, fontSize:'clamp(64px,17vw,260px)',
             letterSpacing:'-0.05em', lineHeight:0.82,
             textTransform:'uppercase', color:'#0a0a0a',
             animation:`${a} 9s infinite`, pointerEvents:'none', userSelect:'none',
@@ -48,7 +48,7 @@ export default function Hero() {
 
         <h1 style={{
           fontFamily:'Helvetica Neue,Helvetica,Arial,sans-serif',
-          fontWeight:700, fontSize:'clamp(96px,17vw,260px)',
+          fontWeight:700, fontSize:'clamp(64px,17vw,260px)',
           letterSpacing:'-0.05em', lineHeight:0.82,
           textTransform:'uppercase', color:'#0a0a0a',
           opacity:on?1:0, transition:'opacity 1s .15s cubic-bezier(0.16,1,0.3,1)',

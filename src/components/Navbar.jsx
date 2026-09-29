@@ -6,7 +6,7 @@ export default function Navbar() {
   useEffect(() => { const fn=()=>setS(window.scrollY>60); window.addEventListener('scroll',fn,{passive:true}); return()=>window.removeEventListener('scroll',fn); },[]);
   return (
     <>
-      <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:500,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 48px',height:s?52:68,background:s?'rgba(242,240,235,0.97)':'transparent',borderBottom:s?'1px solid rgba(10,10,10,0.1)':'1px solid transparent',backdropFilter:s?'blur(16px)':'none',transition:'all .4s cubic-bezier(0.16,1,0.3,1)'}}>
+      <nav style={{position:'fixed',top:0,left:0,right:0,zIndex:500,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 var(--gutter)',height:s?52:68,background:s?'rgba(242,240,235,0.97)':'transparent',borderBottom:s?'1px solid rgba(10,10,10,0.1)':'1px solid transparent',backdropFilter:s?'blur(16px)':'none',transition:'all .4s cubic-bezier(0.16,1,0.3,1)'}}>
         <a href="/" style={{fontSize:13,letterSpacing:'0.18em',textTransform:'uppercase',fontWeight:700,color:'#0a0a0a'}}>{personal.initials}</a>
         <div style={{display:'flex',gap:36,alignItems:'center'}} className="nd">
           {L.map(([l,h])=>(
@@ -19,7 +19,7 @@ export default function Navbar() {
           {[0,1].map(i=><span key={i} style={{display:'block',width:22,height:1,background:'#0a0a0a',transition:'all .3s',transform:o?(i===0?'rotate(45deg) translateY(3px)':'rotate(-45deg) translateY(-3px)'):'none'}}/>)}
         </button>
       </nav>
-      <div style={{position:'fixed',inset:0,zIndex:499,background:'#f2f0eb',display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 48px',opacity:o?1:0,pointerEvents:o?'all':'none',transition:'opacity .35s'}}>
+      <div style={{position:'fixed',inset:0,zIndex:499,background:'#f2f0eb',display:'flex',flexDirection:'column',justifyContent:'center',padding:'0 var(--gutter)',opacity:o?1:0,pointerEvents:o?'all':'none',transition:'opacity .35s'}}>
         {L.map(([l,h],i)=>(
           <a key={h} href={h} onClick={()=>setO(false)} style={{fontSize:'clamp(48px,11vw,96px)',fontWeight:700,letterSpacing:'-0.04em',textTransform:'uppercase',color:'#0a0a0a',borderBottom:'1px solid rgba(10,10,10,0.08)',padding:'16px 0',opacity:o?1:0,transform:o?'none':'translateY(12px)',transition:`all .4s ${i*.07}s`}}>{l}</a>
         ))}
