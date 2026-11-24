@@ -1,46 +1,10 @@
-import React, { useState } from 'react';
-import { experience } from '../data/portfolio';
-import useInView from '../hooks/useInView';
-
-function Row({ item, i }) {
-  const [ref, inView] = useInView(0.1);
-  const [hov, setHov] = useState(false);
-  return (
-    <div ref={ref} onMouseEnter={()=>setHov(true)} onMouseLeave={()=>setHov(false)}
-      className="exp-row" style={{ borderBottom:'1px solid rgba(10,10,10,0.1)', padding:'44px 48px', display:'grid', gridTemplateColumns:'180px 1fr', gap:'0 64px', background:hov?'rgba(10,10,10,0.02)':'transparent', opacity:inView?1:0, transform:inView?'none':'translateY(14px)', transition:`opacity .6s ${i*.1}s cubic-bezier(0.16,1,0.3,1), transform .6s ${i*.1}s, background .3s` }}>
-      <div>
-        <p style={{ fontSize:13, color:'rgba(10,10,10,0.45)', marginBottom:6 }}>{item.period}</p>
-        <p style={{ fontSize:13, color:hov?'rgba(10,10,10,0.75)':'rgba(10,10,10,0.45)', transition:'color .25s' }}>{item.company}</p>
-      </div>
-      <div>
-        <h3 style={{ fontSize:'clamp(22px,3.5vw,36px)', fontWeight:700, letterSpacing:'-0.03em', textTransform:'uppercase', color:'#0a0a0a', marginBottom:12 }}>{item.role}</h3>
-        <p style={{ fontSize:15, color:'rgba(10,10,10,0.6)', lineHeight:1.8, fontWeight:300 }}>{item.desc}</p>
-      </div>
-    </div>
-  );
-}
-
+import React from 'react';
+const roles=[
+  ['Samto','UX/UI Designer','2026 — Present','UX for an AI-based service for consultants and change leaders, focusing on onboarding, work overviews and understandable findings and evidence.'],
+  ['HelloKefi','Brand Identity','Completed commission','Created the brand identity from the ground up, including the logo and packaging design.'],
+  ['Freelance','Web Design & Development','2023 — Present','Websites for small businesses, from client needs and visual direction to responsive React development.'],
+  ['Cozy Vintage','Founder','2020 — 2024','Founded a vintage resale business in Bergen, working across the website, visual presentation, marketing and customer communication.']
+];
 export default function Experience() {
-  const [ref, inView] = useInView(0.1);
-  return (
-    <section id="experience" style={{ borderTop:'1px solid rgba(10,10,10,0.1)', paddingTop:120 }}>
-      <div ref={ref} className="section-pad" style={{ padding:'0 48px 56px', opacity:inView?1:0, transition:'opacity .7s' }}>
-        <p style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>Experience</p>
-      </div>
-      {experience.map((item,i) => <Row key={i} item={item} i={i} />)}
-      <div className="exp-row" style={{ borderBottom:'1px solid rgba(10,10,10,0.1)', padding:'44px 48px', display:'grid', gridTemplateColumns:'180px 1fr', gap:'0 64px', background:'rgba(10,10,10,0.01)' }}>
-        <div>
-          <p style={{ fontSize:13, color:'rgba(10,10,10,0.45)', marginBottom:6 }}>2023 – 2026</p>
-          <p style={{ fontSize:13, color:'rgba(10,10,10,0.45)' }}>Stockholm University</p>
-        </div>
-        <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', flexWrap:'wrap', gap:16 }}>
-          <div>
-            <h3 style={{ fontSize:'clamp(22px,3.5vw,36px)', fontWeight:700, letterSpacing:'-0.03em', textTransform:'uppercase', color:'#0a0a0a', marginBottom:10 }}>Bachelor's — Interaction Design</h3>
-            <p style={{ fontSize:15, color:'rgba(10,10,10,0.6)', fontWeight:300 }}>Department of Computer and Systems Sciences (DSV). Graduated June 2026.</p>
-          </div>
-          <span style={{ fontSize:11, letterSpacing:'0.12em', textTransform:'uppercase', padding:'6px 14px', border:'1px solid rgba(10,10,10,0.25)', color:'rgba(10,10,10,0.6)', whiteSpace:'nowrap' }}>Graduated</span>
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="profile-experience" aria-labelledby="experience-title"><h3 id="experience-title">Experience</h3>{roles.map(([name,role,date,text])=><details key={name}><summary><span>{name}</span><span>{role}</span><span className="detail-plus" aria-hidden="true">+</span></summary><div><span className="experience-date">{date}</span><p>{text}</p></div></details>)}</section>;
 }

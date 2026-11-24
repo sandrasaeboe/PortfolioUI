@@ -1,70 +1,37 @@
-# Getting Started with Create React App
+# Sandra Sæbø — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A minimal, black-and-white gallery portfolio for interaction, UX/UI and digital design opportunities. Built with React and React Router.
 
-## Available Scripts
+## Development
 
-In the project directory, you can run:
+Run `npm install` if dependencies are missing, then `npm start` for the local preview. Run `npm run build` to generate the production website in `build/`.
 
-### `npm start`
+## Interactions
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Opening the homepage plays a brief typographic name introduction before revealing the portfolio. It can be dismissed with Escape. Direct project links and returns from case studies bypass it; reduced-motion preferences shorten it.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- A focused project gallery supports pointer dragging, touch swiping, left/right keyboard navigation and wheel/trackpad gestures, wrapping from the last project to the first.
+- Overview spreads all five projects into a contact sheet; project names return to a focused view.
+- Subtle pointer response adds depth without automatic animation loops.
+- About opens a native modal panel with education, professional background and expandable experience. Escape closes it and restores focus.
+- The homepage has no banners, ticker, hero slogan or long biography.
+- Reduced-motion preferences disable transitions and pointer tilt.
 
-### `npm test`
+## Content
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Homepage elements live in `src/components/`; the profile panel is opened by `Navbar.jsx`.
+- The gallery projects and interaction logic are in `src/components/Work.jsx`. Civic Watch uses the original Wix SVG and app screens in `public/images/civic-watch/`; its five-second Y-axis spin is rendered by `CivicLogo.jsx`, with pause and reduced-motion support.
+- Affinity’s research case study is in `src/pages/ThesisCase.jsx`.
+- Emelinn, Motion and Spiral case studies are in `src/pages/ProjectCase.jsx`.
+- Shared case layout is in `src/components/CaseLayout.jsx`.
+- Global typography, responsive layouts and reduced-motion styles are in `src/index.css`.
+- Existing project images and thesis material are in `public/images/`.
+- The English CV is at `public/Sandra-Saeboe-CV.pdf`.
 
-### `npm run build`
+The portfolio uses existing project material and professional background supplied in the portfolio and prior CV chats. Samto and HelloKefi are represented as experience; no speculative client visuals or outcome statistics have been added.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The existing site is hosted at https://portfolio-sandrasaeboe.vercel.app. This checkout builds as a static Create React App project. In Vercel use `npm run build` and output directory `build`. `vercel.json` rewrites project routes to the app entry point so direct case-study links work.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A local rebuild does not change the published site. Deploy through the existing Vercel project or its connected Git repository after reviewing the new content.

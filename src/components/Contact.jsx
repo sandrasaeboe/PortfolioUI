@@ -1,55 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { personal } from '../data/portfolio';
-import useInView from '../hooks/useInView';
-
 export default function Contact() {
-  const [eRef,eIn] = useInView(0.05), [fRef,fIn] = useInView(0.05);
-
-  return (
-    <section id="contact" style={{ borderTop:'1px solid rgba(10,10,10,0.1)', paddingTop:120, paddingBottom:100 }}>
-
-      <div className="section-pad" style={{ padding:'0 48px 64px' }}>
-        <span style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>Contact</span>
-      </div>
-
-      {/* Big statement line — like "MY TREND IS A LIFESTYLE" spanning full width */}
-      <div ref={eRef} className="section-pad" style={{ padding:'0 48px 80px', opacity:eIn?1:0, transform:eIn?'none':'translateY(20px)', transition:'all .9s cubic-bezier(0.16,1,0.3,1)', overflow:'hidden' }}>
-        <a href={`mailto:${personal.email}`}
-          style={{ display:'block', fontFamily:'Helvetica Neue,Helvetica,Arial,sans-serif', fontWeight:700, fontSize:'clamp(32px,6vw,96px)', letterSpacing:'-0.04em', lineHeight:1, color:'#0a0a0a', transition:'opacity .2s', wordBreak:'break-all' }}
-          onMouseEnter={e=>e.currentTarget.style.opacity='.3'} onMouseLeave={e=>e.currentTarget.style.opacity='1'}>
-          {personal.email}
-        </a>
-      </div>
-
-      {/* CTA */}
-      <div ref={fRef} className="section-pad two-col" style={{ padding:'0 48px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 100px', opacity:fIn?1:0, transform:fIn?'none':'translateY(16px)', transition:'all .9s .1s cubic-bezier(0.16,1,0.3,1)' }}>
-        <div>
-          <p style={{ fontSize:'clamp(22px,3vw,32px)', color:'#0a0a0a', fontWeight:500, letterSpacing:'-0.01em', lineHeight:1.4, marginBottom:32, maxWidth:420 }}>
-            Reach out — I read every message and reply within 24 hours.
-          </p>
-          <a href={`mailto:${personal.email}`}
-            style={{ display:'inline-flex', alignItems:'center', gap:10, padding:'16px 32px', background:'#0a0a0a', color:'#f2f0eb', fontSize:12, letterSpacing:'0.18em', textTransform:'uppercase', fontWeight:500, transition:'opacity .2s' }}
-            onMouseEnter={e=>e.currentTarget.style.opacity='.75'} onMouseLeave={e=>e.currentTarget.style.opacity='1'}>
-            Email me ↗
-          </a>
-        </div>
-        <div style={{ display:'flex', flexDirection:'column', justifyContent:'space-between', paddingBottom:8 }}>
-          <div>
-            <p style={{ fontSize:'clamp(18px,2.5vw,26px)', color:'rgba(10,10,10,0.2)', fontWeight:300, lineHeight:1.55, marginBottom:24, letterSpacing:'-0.01em' }}>
-              "Design is not what you see.<br/>It is what you experience."
-            </p>
-            <p style={{ fontSize:12, color:'rgba(10,10,10,0.2)', letterSpacing:'0.08em' }}></p>
-          </div>
-          <div style={{ display:'flex', gap:20 }}>
-            {[['GitHub',personal.github],['LinkedIn',personal.linkedin]].map(([l,h]) => (
-              <a key={l} href={h} target="_blank" rel="noreferrer" style={{ fontSize:12, letterSpacing:'0.1em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)', borderBottom:'1px solid rgba(10,10,10,0.15)', paddingBottom:3, transition:'all .2s' }}
-                onMouseEnter={e=>{e.currentTarget.style.color='#0a0a0a';e.currentTarget.style.borderColor='rgba(10,10,10,0.5)'}} onMouseLeave={e=>{e.currentTarget.style.color='rgba(10,10,10,0.4)';e.currentTarget.style.borderColor='rgba(10,10,10,0.15)'}}>
-                {l} ↗
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  const [copied,setCopied]=useState(false);
+  const [error,setError]=useState(false);
+  const timer=useRef(null);
+  useEffect(()=>()=>clearTimeout(timer.current),[]);
+  async function copy() {
+    try {await navigator.clipboard.writeText(personal.email);setCopied(true);setError(false);clearTimeout(timer.current);timer.current=setTimeout(()=>setCopied(false),2500);} catch {setError(true);}
+  }
+  return <section className="brutal-contact" id="contact" aria-labelledby="contact-title"><div className="section-bar"><p>Open to design opportunities</p><span>Let’s talk.</span></div><h2 id="contact-title"><a href={`mailto:${personal.email}`}>GET IN<br /><span>TOUCH<span className="contact-star" aria-hidden="true">✳</span></span></a></h2><div className="contact-line"><a href={`mailto:${personal.email}`}>{personal.email}</a><button type="button" onClick={copy}>{copied?'Copied':'Copy email'}</button><span className="sr-only" role="status">{copied?'Email address copied.':error?'Could not copy. Use the email link to get in touch.':''}</span></div></section>;
 }

@@ -1,102 +1,68 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { projects } from '../data/portfolio';
-import useInView from '../hooks/useInView';
-
-function ProjectRow({ p, i }) {
-  const [ref, inView] = useInView(0.06);
-  const [open, setOpen] = useState(false);
-  const [hov, setHov] = useState(false);
-
-  return (
-    <div ref={ref}
-      style={{
-        borderTop: i === 0 ? '1px solid rgba(10,10,10,0.1)' : 'none',
-        borderBottom:'1px solid rgba(10,10,10,0.1)',
-        opacity:inView?1:0, transform:inView?'none':'translateY(28px)',
-        transition:`opacity .8s ${i*.1}s cubic-bezier(0.16,1,0.3,1), transform .8s ${i*.1}s cubic-bezier(0.16,1,0.3,1)`,
-      }}
-    >
-      {/* Main row — click to expand */}
-      <button
-        onClick={() => setOpen(!open)}
-        onMouseEnter={() => setHov(true)}
-        onMouseLeave={() => setHov(false)}
-        data-hover
-        className="work-row"
-        style={{ width:'100%', padding:'52px 48px', display:'flex', alignItems:'center', justifyContent:'space-between', gap:32, textAlign:'left', background:'transparent', transition:'background .3s' }}
-      >
-        <div style={{ flex:1, minWidth:0 }}>
-          {/* Year + role — tiny above the title */}
-          <p style={{ fontSize:11, letterSpacing:'0.18em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)', marginBottom:16, fontWeight:400 }}>
-            {p.index} — {p.year}
-          </p>
-          {/* HUGE title — like "THE WORLD FADES INTO STARES" */}
-          <h3 style={{
-            fontFamily:'Helvetica Neue,Helvetica,Arial,sans-serif',
-            fontWeight:700,
-            fontSize:'clamp(44px,8vw,120px)',
-            letterSpacing:'-0.04em',
-            textTransform:'uppercase',
-            lineHeight:0.88,
-            color:'#0a0a0a',
-            transition:'opacity .2s',
-            opacity: hov && !open ? 0.55 : 1,
-          }}>
-            {p.title}
-          </h3>
-        </div>
-        {p.img && (
-          <img src={p.img} alt={`${p.title} — screenshot`} loading="lazy" className="work-thumb"
-            style={{ width:'clamp(200px,26vw,380px)', aspectRatio:'16 / 10', objectFit:'cover', objectPosition:'top', flexShrink:0, border:'1px solid rgba(10,10,10,0.1)', transition:'transform .5s cubic-bezier(0.16,1,0.3,1)', transform: hov && !open ? 'scale(1.02)' : 'none' }} />
-        )}
-        <span style={{ fontSize:28, color:'rgba(10,10,10,0.3)', transform:open?'rotate(45deg)':'none', transition:'transform .4s cubic-bezier(0.16,1,0.3,1)', flexShrink:0, lineHeight:1 }}>+</span>
-      </button>
-
-      {/* Expanded content */}
-      <div style={{ overflow:'hidden', maxHeight:open?'1000px':'0', transition:'max-height .6s cubic-bezier(0.16,1,0.3,1)' }}>
-        <div className="work-detail" style={{ padding:'0 48px 60px', display:'grid', gridTemplateColumns:'1fr 1fr', gap:'0 80px', alignItems:'start' }}>
-          <div>
-            <p style={{ fontSize:17, color:'rgba(10,10,10,0.7)', lineHeight:1.9, fontWeight:300, marginBottom:24 }}>
-              {p.desc}
-            </p>
-            <p style={{ fontSize:15, fontStyle:'italic', color:'rgba(10,10,10,0.35)', marginBottom:32, fontWeight:300 }}>
-              "{p.what}"
-            </p>
-            <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
-              {p.tech.map(t => (
-                <span key={t} style={{ fontSize:11, letterSpacing:'0.1em', textTransform:'uppercase', padding:'5px 14px', border:'1px solid rgba(10,10,10,0.2)', color:'rgba(10,10,10,0.65)' }}>{t}</span>
-              ))}
-            </div>
-          </div>
-          <div style={{ display:'flex', flexDirection:'column', gap:12 }}>
-            <p style={{ fontSize:12, letterSpacing:'0.14em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>{p.role}</p>
-            {p.link.startsWith('/') ? (
-              <Link to={p.link} style={{ display:'inline-flex', alignItems:'center', gap:10, fontSize:13, letterSpacing:'0.1em', textTransform:'uppercase', color:'#0a0a0a', borderBottom:'1px solid rgba(10,10,10,0.25)', paddingBottom:4, alignSelf:'flex-start', transition:'border-color .2s' }}
-                onMouseEnter={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.8)'} onMouseLeave={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.25)'}>
-                View case study ↗
-              </Link>
-            ) : (
-              <a href={p.link} style={{ display:'inline-flex', alignItems:'center', gap:10, fontSize:13, letterSpacing:'0.1em', textTransform:'uppercase', color:'#0a0a0a', borderBottom:'1px solid rgba(10,10,10,0.25)', paddingBottom:4, alignSelf:'flex-start', transition:'border-color .2s' }}
-                onMouseEnter={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.8)'} onMouseLeave={e=>e.currentTarget.style.borderColor='rgba(10,10,10,0.25)'}>
-                View project ↗
-              </a>
-            )}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+import CivicLogo from './CivicLogo';
+import useCarouselMotion from '../hooks/useCarouselMotion';
+const projects=[
+  {name:'Emelinn',slug:'emelinn',category:'Visual design & development',image:'emelinn.jpg'},
+  {name:'Motion',slug:'motion',category:'Interaction & creative development',image:'motion.jpg'},
+  {name:'Affinity',slug:'affinity',category:'Research & interaction design',image:'affinity.jpg'},
+  {name:'Spiral',slug:'spiral',category:'Interface design & development',image:'spiral.jpg'},
+  {name:'Civic Watch',slug:'civic-watch',category:'Critical & interaction design',image:null}
+];
 export default function Work() {
-  const [ref, inView] = useInView(0.05);
-  return (
-    <section id="work" style={{ paddingTop:120 }}>
-      <div ref={ref} className="section-pad" style={{ padding:'0 48px 56px', opacity:inView?1:0, transition:'opacity .7s cubic-bezier(0.16,1,0.3,1)' }}>
-        <p style={{ fontSize:11, letterSpacing:'0.2em', textTransform:'uppercase', color:'rgba(10,10,10,0.4)' }}>Selected Work</p>
-      </div>
-      {projects.map((p,i) => <ProjectRow key={p.id} p={p} i={i} />)}
-    </section>
-  );
+  const [spread,setSpread]=useState(false);
+  const [spinPaused,setSpinPaused]=useState(false);
+  const drag=useRef(null);
+  const moved=useRef(false);
+  const canvas=useRef(null);
+  const {active,goTo,step,beginDrag,dragTo,releaseDrag}=useCarouselMotion(canvas,projects.length,spread);
+  function select(index){goTo(index);}
+  function start(e){
+    if(spread||(e.pointerType==='mouse'&&e.button!==0))return;
+    drag.current={x:e.clientX,y:e.clientY,origin:null,id:e.pointerId};moved.current=false;
+  }
+  function move(e){
+    const area=e.currentTarget.getBoundingClientRect();
+    if(e.pointerType==='mouse'){
+      e.currentTarget.style.setProperty('--look-x',`${((e.clientX-area.left)/area.width-.5)*4}deg`);
+      e.currentTarget.style.setProperty('--look-y',`${-((e.clientY-area.top)/area.height-.5)*3}deg`);
+    }
+    if(!drag.current)return;
+    const dx=e.clientX-drag.current.x,dy=e.clientY-drag.current.y;
+    if(!moved.current&&Math.abs(dx)>7&&Math.abs(dx)>Math.abs(dy)){
+      moved.current=true;drag.current.origin=beginDrag();e.currentTarget.setPointerCapture(e.pointerId);
+    }
+    if(!moved.current)return;
+    e.preventDefault();
+    const card=e.currentTarget.querySelector('.project-object');
+    dragTo(drag.current.origin-dx/(card.offsetWidth*1.3));
+  }
+  function end(e){
+    if(!drag.current)return;
+    if(moved.current){e.preventDefault();releaseDrag();}
+    drag.current=null;
+    if(e.currentTarget.hasPointerCapture(e.pointerId))e.currentTarget.releasePointerCapture(e.pointerId);
+  }
+  function reset(e){
+    if(drag.current&&(!e||!canvas.current?.hasPointerCapture(drag.current.id))){if(moved.current)releaseDrag(true);drag.current=null;}
+    canvas.current?.style.setProperty('--look-x','0deg');canvas.current?.style.setProperty('--look-y','0deg');
+  }
+  function cancel(e){if(drag.current&&moved.current)releaseDrag(true);drag.current=null;reset(e);}
+  function key(e){if(e.key==='Enter')moved.current=false;if(spread)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();canvas.current.focus({preventScroll:true});step(e.key==='ArrowRight'?1:-1);}}
+  const current=projects[active];
+  return <section className={`project-explorer ${spread?'is-spread':''} ${spinPaused?'spin-paused':''}`} id="work" aria-label="Selected projects">
+    <div className="explorer-toolbar"><span>Selected work</span><button type="button" className="layout-control" aria-pressed={spread} onClick={()=>{setSpread(!spread);reset();}}><span className={`layout-icon ${spread?'icon-stack':''}`} aria-hidden="true"><i/><i/><i/><i/></span>{spread?'Focus view':'Overview'}</button></div>
+    <div ref={canvas} className="project-canvas" tabIndex={0} role="group" aria-label="Project gallery. Use left and right arrow keys to browse." onPointerDown={start} onPointerMove={move} onPointerUp={end} onPointerCancel={cancel} onPointerLeave={reset} onKeyDown={key}>
+      {projects.map((p,index)=>{
+        let position=(index-active+projects.length)%projects.length;if(position>projects.length/2)position-=projects.length;
+        const selected=index===active;
+        return <article key={p.slug} className={`project-object ${selected?'is-selected':''}`} data-position={position} style={{'--order':index}}>
+          {spread||selected ? <Link className="project-artwork" to={`/work/${p.slug}`} aria-label={`View ${p.name} case study`} draggable="false" onClick={e=>{if(moved.current){e.preventDefault();moved.current=false;}}}><>{p.slug==='civic-watch'?<CivicLogo alt="Civic Watch — original spinning logo"/>:<img src={`/images/covers/${p.image}`} alt={`${p.name} project preview`} draggable="false" fetchPriority={index===0?'high':'auto'} />}</></Link> : <button type="button" className="project-artwork" aria-label={`Preview ${p.name}`} tabIndex={-1} onClick={()=>{if(!moved.current)select(index);moved.current=false;}}><>{p.slug==='civic-watch'?<CivicLogo alt=""/>:<img src={`/images/covers/${p.image}`} alt="" draggable="false" />}</></button>}
+          {spread&&<div className="overview-caption"><h2>{p.name}</h2><span>{p.category}</span></div>}
+        </article>;
+      })}
+    </div>
+    {!spread&&<div className={`project-caption ${current.slug==='civic-watch'?'long-project-title':''}`} aria-live="polite" aria-atomic="true"><div key={current.slug} className="caption-copy"><h2><Link to={`/work/${current.slug}`} aria-label={current.name}><span className="caption-word" aria-hidden="true">{Array.from(current.name).map((letter,index)=><span key={index} style={{'--letter':index}}>{letter===' '?'\u00a0':letter}</span>)}</span></Link></h2><p>{current.category}</p></div><Link className="project-case-link" to={`/work/${current.slug}`}>Case study</Link>{current.slug==='civic-watch'&&<button type="button" className="logo-motion-toggle" aria-pressed={spinPaused} onClick={()=>setSpinPaused(!spinPaused)}>{spinPaused?'Play logo':'Pause logo'}</button>}</div>}
+    <div className="project-navigation"><div className="project-choices" aria-label="Choose a project">{projects.map((p,i)=><button type="button" key={p.slug} aria-pressed={active===i} onClick={()=>{select(i);setSpread(false);}}>{p.name}</button>)}</div></div>
+  </section>;
 }
